@@ -81,11 +81,17 @@ galleryItems.forEach(function(node) {
   armImg(node);
 });
 
-lightboxClose.addEventListener('click', function(e) {
-  e.preventDefault();
+var closeDivs = [lightboxClose,lightboxLayout];
 
-  turnLightbox('off');
-})
+closeDivs.forEach(function(node) {
+  node.addEventListener('click', function(e) {
+    e.preventDefault();
+  
+    if(e.target === node) {
+      turnLightbox('off');
+    }
+  });
+});
 
 window.addEventListener('keyup', function(e) {
   e.preventDefault();
