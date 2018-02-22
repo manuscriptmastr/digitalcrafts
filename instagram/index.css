@@ -6,6 +6,15 @@ img, svg {
   max-width: 100%;
 }
 
+h1 {
+
+}
+
+h2 {
+  font-weight: 300;
+  letter-spacing: 0.025em;
+}
+
 html {
   font-family: 'Montserrat', sans-serif;
 }
@@ -64,13 +73,15 @@ main {
 
 .gallery__item:hover .gallery__img {
   opacity: 1;
-  transition-duration: 0.05s;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.6);
+  transition-duration: 0.1s;
 }
 
 .gallery__img {
   object-fit: cover;
   object-position: center;
-  opacity: 0.5;
+  opacity: 0.75;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.5);
   transition: all 0.2s ease-in-out;
 }
 
