@@ -17,6 +17,7 @@ h2 {
 
 html {
   font-family: 'Montserrat', sans-serif;
+  background-color: #FEFEFE;
 }
 
 html, .lightbox {
@@ -80,7 +81,7 @@ main {
 .gallery__img {
   object-fit: cover;
   object-position: center;
-  opacity: 0.75;
+  opacity: 0.9;
   box-shadow: 0 2px 10px rgba(0,0,0,0.5);
   transition: all 0.2s ease-in-out;
 }
