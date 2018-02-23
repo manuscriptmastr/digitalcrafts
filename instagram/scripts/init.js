@@ -74,7 +74,9 @@ var galleryItems = images.map(function(obj) {
 
 galleryItems.forEach(function(node) {
   galleryList.appendChild(node);
-  armImg(node);
+
+  var img = node.querySelector('.gallery__img');
+  armImg(img);
 });
 
 var lightboxImg = createImg(images[0]);
@@ -83,7 +85,7 @@ lightboxImg.classList.add('lightbox__img');
 var lightboxNext = createLightboxBtn('next');
 var lightboxPrev = createLightboxBtn('prev');
 
-lightboxElements = [lightboxPrev, lightboxImg, lightboxNext];
+var lightboxElements = [lightboxPrev, lightboxImg, lightboxNext];
 
 lightboxElements.forEach(function(node) {
   lightboxLayout.appendChild(node);
