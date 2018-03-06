@@ -1,9 +1,17 @@
-var array = [
-  [ 0, 0, 0, 1, 0, 1 ],
-  [ 1, 1, 1, 0, 1, 1 ],
-  [ 1, 1, 0, 1, 0, 0 ],
-  [ 0, 0, 1, 0, 1, 0 ]
-];
+var generateCell = () => {
+  return Math.round(Math.random());
+}
+
+var getInitArray = (x, y) => {
+  var array = Array(y).fill(null)
+    .map(row => Array(x).fill(null)
+    .map(cell => generateCell())
+  );
+
+  return array;
+}
+
+var array = getInitArray(20,10);
 
 var getNeighbors = (x, y) => {
   var neighbors = [];
@@ -60,4 +68,7 @@ var getNewArray = array => {
   return newArray;
 }
 
-console.log(getNewArray(array));
+for (var i = 1; i < 10; i++) {
+  console.log(array);
+  array = getNewArray(array);
+}
