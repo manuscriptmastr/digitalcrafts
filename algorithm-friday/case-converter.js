@@ -1,5 +1,3 @@
-const assert = require('assert');
-
 var camelCase = function(arr) {
   str = '';
 
@@ -129,19 +127,7 @@ var transformText = function(str,t) {
   }
 
   var transformedText = transform(wordArray);
-  console.log(t, transformedText);
   return transformedText;
 }
 
-assert(textToArray('Hello').join(',') === 'hello', 'Failed to transform text to array');
-assert(textToArray('Hello world').join(',') === 'hello,world', 'Failed to transform text to array');
-assert(textToArray('HELLO ~!@# !)(*@) pink  $%)(*) $$$ world %%%%  ').join(',') === 'hello,pink,world', 'Failed to transform text to array');
-
-assert(transformText('hello   WORLD', '  camelCaSe $$ @#$$') === 'helloWorld', 'Failed to transform string to camelcase');
-assert(transformText(' %  hello   World %$   ', 'camelCase') === 'helloWorld', 'Failed to transform string to camelcase');
-assert(transformText('Hello', 'camelcase') === 'hello', 'Failed to transform string to camelcase');
-
-assert(transformText('Hello', 'snakecase') === 'hello', 'Failed to transform string to snakecase');
-assert(transformText('   #hello $^ World', 'snakeCase') === 'hello_world', 'Failed to transform string to snakecase');
-
-assert(transformText(' $ $  ', 'snakecase') === '', 'Failed to transform string to snakecase');
+module.exports = transformText;

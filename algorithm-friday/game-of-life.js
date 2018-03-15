@@ -68,7 +68,7 @@ var getNewArray = array => {
   return newArray;
 }
 
-for (var i = 1; i < 10; i++) {
-  console.log(array);
-  array = getNewArray(array);
+module.exports = {
+  newBoard: getInitArray,
+  nextBoard: getNewArray
 }

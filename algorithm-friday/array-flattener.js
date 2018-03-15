@@ -1,11 +1,9 @@
-const assert = require('assert');
+var flattenArray = function(array) {
+  var newArray = [];
 
-var newArray = [];
-
-var flatten = function(array) {
-  for (i of array) {
-    if (i.length > 1 || typeof(i) === 'object') {
-      flatten(i);
+  for (var i of array) {
+    if (Array.isArray(i)) {
+      newArray = newArray.concat(flattenArray(i));
     } else {
       newArray.push(i);
     }
@@ -14,4 +12,4 @@ var flatten = function(array) {
   return newArray;
 }
 
-console.log(flatten([1, [2, [3, [4]]]]));
+module.exports = flattenArray;
