@@ -1,4 +1,3 @@
-const http = require('http');
 const dns = require('dns');
 
 var getIpAddress = (hostname, callback) => {
