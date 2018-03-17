@@ -1,11 +1,4 @@
 const fs = require('fs');
-const readline = require('readline');
-
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-  terminal: false
-});
 
 var read = (fileName, callback) => {
   fs.readFile(fileName, 'utf-8', (err, data) => {
@@ -27,21 +20,15 @@ var write = (fileName, data, callback) => {
   });
 }
 
-var capitalizeString = string => string.toUpperCase();
-
-var transformFile = transform => () => {
-  rl.question('File to transform: ', oldFile => {
-    rl.question('File to save to: ', newFile => {
-      rl.close();
-      readFile(oldFile, data => {
-        var newString = transform(data);
-        writeFile(newFile, newString, () => console.log(newString));
-      });
-    });
+var convert = transform => (oldFile, newFile) => {
+  read(oldFile, data => {
+    var newString = transform(data);
+    write(newFile, newString, () => console.log(newString));
   });
 }
 
-var copy = transformFile(d => d);
-var capitalize = transformFile(capitalizeString);
+var copy = convert(s => s);
+var uppercase = convert(s => s.toUpperCase());
+var lowercase = convert(s => s.toLowerCase());
 
-module.exports = { copy, capitalize, read, write };
+module.exports = { read, write, copy, uppercase, lowercase };

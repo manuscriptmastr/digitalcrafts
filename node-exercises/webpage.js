@@ -1,4 +1,5 @@
 const http = require('http');
+const { write } = require('./file');
 
 var getWebpage = (url, callback) => {
   http.get(url, response => {
@@ -8,8 +9,7 @@ var getWebpage = (url, callback) => {
     });
     response.on('end', () => {
       try {
-        var data = JSON.parse(rawData);
-        callback(data);
+        callback(rawData);
       } catch (e) {
         throw(e);
       }
@@ -17,4 +17,10 @@ var getWebpage = (url, callback) => {
   });
 }
 
-module.exports = getWebpage;
+var saveWebpage = (url, fileName) => {
+  getWebpage(url, data => {
+    write(fileName, data, () => console.log(data));
+  });
+}
+
+module.exports = saveWebpage;
