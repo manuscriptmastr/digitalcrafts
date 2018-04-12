@@ -5,13 +5,15 @@ let props = {
       id: 1,
       title: 'News Item 1',
       author: 'Joshua',
-      body: 'This is a short message'
+      body: 'This is a short message',
+      shouldDisplay: true
     },
     {
       id: 2,
       title: 'News Item 2',
       author: 'Jonathan',
-      body: 'This is a looooooooooong message looooooooooong message looooooooooong message'
+      body: 'This is a looooooooooong message looooooooooong message looooooooooong message',
+      shouldDisplay: true
     },
   ]
 }
@@ -46,7 +48,7 @@ let Blog = (blog) => {
 }
 
 let BlogList = ({ blogs }) =>
-  h('ul', {}, blogs.map(b => h(Blog, b, [])));
+  h('ul', {}, blogs.map(b => b.shouldDisplay && h(Blog, b, [])));
 
 let Page = (props) => h('div', null, [
   h(Greeting, {name: props.name}, []),
