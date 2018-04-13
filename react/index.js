@@ -51,7 +51,7 @@ class Page extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      blogs: initBlogs,
+      blogs: this.props.blogs,
       tempBlog: null,
       editMode: false
     }
@@ -112,4 +112,5 @@ class Page extends React.Component {
   }
 }
 
-ReactDOM.render(h(Page), root);
+// Initialize page
+ReactDOM.render(h(Page, { blogs: initBlogs }), root);
