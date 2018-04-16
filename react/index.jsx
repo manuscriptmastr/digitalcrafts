@@ -1,23 +1,23 @@
 // Initial definitions
 
 const root = document.querySelector('.react-root');
-const initBlogs = [
-  {
-    id: 1,
-    title: 'News Item 1',
-    body: 'This is a short message'
-  },
-  {
-    id: 2,
-    title: 'News Item 2',
-    body: 'This is a looooooooooong message looooooooooong message looooooooooong message'
-  },
-  {
-    id: 3,
-    title: 'News Item 3',
-    body: 'I love ice cream lorem ipsum mupsi merol'
-  }
-];
+// const initBlogs = [
+//   {
+//     id: 1,
+//     title: 'News Item 1',
+//     body: 'This is a short message'
+//   },
+//   {
+//     id: 2,
+//     title: 'News Item 2',
+//     body: 'This is a looooooooooong message looooooooooong message looooooooooong message'
+//   },
+//   {
+//     id: 3,
+//     title: 'News Item 3',
+//     body: 'I love ice cream lorem ipsum mupsi merol'
+//   }
+// ];
 
 // Components
 let Blog = ({ blog, removeBlog, initForm }) => {
@@ -57,10 +57,22 @@ class Page extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      blogs: this.props.blogs,
+      blogs: [],
       tempBlog: null,
       editMode: false
     }
+  }
+
+  fetchData () {
+    fetch('https://jsonplaceholder.typicode.com/posts')
+      .then(data => data.json())
+      .then(newBlogs => this.setState({
+        blogs: newBlogs
+      }));
+  }
+
+  componentDidMount() {
+    this.fetchData();
   }
 
   render() {
@@ -122,4 +134,4 @@ class Page extends React.Component {
 }
 
 // Initialize page
-ReactDOM.render(<Page blogs={initBlogs} />, root);
+ReactDOM.render(<Page />, root);
