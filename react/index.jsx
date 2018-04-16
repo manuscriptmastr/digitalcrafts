@@ -1,23 +1,6 @@
 // Initial definitions
 
 const root = document.querySelector('.react-root');
-// const initBlogs = [
-//   {
-//     id: 1,
-//     title: 'News Item 1',
-//     body: 'This is a short message'
-//   },
-//   {
-//     id: 2,
-//     title: 'News Item 2',
-//     body: 'This is a looooooooooong message looooooooooong message looooooooooong message'
-//   },
-//   {
-//     id: 3,
-//     title: 'News Item 3',
-//     body: 'I love ice cream lorem ipsum mupsi merol'
-//   }
-// ];
 
 // Components
 let Blog = ({ blog, removeBlog, initForm }) => {
