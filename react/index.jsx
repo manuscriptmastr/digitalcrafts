@@ -1,7 +1,6 @@
 // Initial definitions
 
 const root = document.querySelector('.react-root');
-const h = React.createElement;
 const initBlogs = [
   {
     id: 1,
@@ -110,14 +109,17 @@ class Page extends React.Component {
       });
     }
 
-    return h('section', { className: 'page' },
-      (editMode ?
-        h(Form, { key: 'form', tempBlog, updateBlogInput, submitForm }) :
-        h(BlogList, { key: 'blog-list', blogs, removeBlog, initForm })
-      )
+    let form = <Form key="form" tempBlog={tempBlog} updateBlogInput={updateBlogInput} submitForm={submitForm} />;
+    let blogList = <BlogList key="blog-list" blogs={blogs} removeBlog={removeBlog} initForm={initForm} />;
+    let currentComponent = editMode ? form : blogList;
+    
+    return (
+      <section className="page">
+        {currentComponent}
+      </section>
     );
   }
 }
 
 // Initialize page
-ReactDOM.render(h(Page, { blogs: initBlogs }), root);
+ReactDOM.render(<Page blogs={initBlogs} />, root);
