@@ -24,12 +24,14 @@ const initBlogs = [
 let Blog = ({ blog, removeBlog, initForm }) => {
   let { title, body } = blog;
 
-  return h('li', { className: 'blog' }, [
-    h('h1', { key: 'title' }, title),
-    h('p', { key: 'body' }, body),
-    h('button', { key: 'delete', onClick: () => removeBlog(blog) }, 'Delete'),
-    h('button', { key: 'edit', onClick: () => initForm(blog) }, 'Edit')
-  ]);
+  return (
+    <li className="blog">
+      <h1 key="title">{title}</h1>
+      <p key="body">{body}</p>
+      <button key="delete" onClick={() => removeBlog(blog)}>Delete</button>
+      <button key="edit" onClick={() => initForm(blog)}>Edit</button>
+    </li>
+  );
 }
 
 let BlogList = ({ blogs, initForm, removeBlog }) =>
