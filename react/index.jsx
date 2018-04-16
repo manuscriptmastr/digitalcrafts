@@ -1,7 +1,6 @@
 // Initial definitions
 
 const root = document.querySelector('.react-root');
-const h = React.createElement;
 const initBlogs = [
   {
     id: 1,
@@ -24,27 +23,34 @@ const initBlogs = [
 let Blog = ({ blog, removeBlog, initForm }) => {
   let { title, body } = blog;
 
-  return h('li', { className: 'blog' }, [
-    h('h1', { key: 'title' }, title),
-    h('p', { key: 'body' }, body),
-    h('button', { key: 'delete', onClick: () => removeBlog(blog) }, 'Delete'),
-    h('button', { key: 'edit', onClick: () => initForm(blog) }, 'Edit')
-  ]);
+  return (
+    <li className="blog">
+      <h1 key="title">{title}</h1>
+      <p key="body">{body}</p>
+      <button key="delete" onClick={() => removeBlog(blog)}>Delete</button>
+      <button key="edit" onClick={() => initForm(blog)}>Edit</button>
+    </li>
+  );
 }
 
-let BlogList = ({ blogs, initForm, removeBlog }) =>
-  h('ul', { className: 'blog-list' }, [
-    blogs.map(b => h(Blog, { blog: b, removeBlog, initForm }))
-  ]);
+let BlogList = ({ blogs, initForm, removeBlog }) => (
+  <ul className="blog-list">
+    {blogs.map(b => (
+      <Blog blog={b} removeBlog={removeBlog} initForm={initForm}/>
+    ))}
+  </ul>
+);
 
 let Form = ({ tempBlog, updateBlogInput, submitForm }) => {
   let { title, body } = tempBlog;
 
-  return h('form', { className: 'form' }, [
-    h('input', { type: 'text', onChange: (e) => updateBlogInput({ title: e.target.value }), value: title }),
-    h('input', { type: 'text', onChange: (e) => updateBlogInput({ body: e.target.value }), value: body }),
-    h('button', { onClick: () => submitForm(tempBlog) }, 'Save')
-  ]);
+  return (
+    <form className="form">
+      <input type="text" onChange={(e) => updateBlogInput({ title: e.target.value })} value={title} />
+      <input type="text" onChange={(e) => updateBlogInput({ body: e.target.value })} value={body} />
+      <button onClick={() => submitForm(tempBlog)}>Save</button>
+    </form>
+  );
 }
 
 class Page extends React.Component {
@@ -103,14 +109,17 @@ class Page extends React.Component {
       });
     }
 
-    return h('section', { className: 'page' },
-      (editMode ?
-        h(Form, { key: 'form', tempBlog, updateBlogInput, submitForm }) :
-        h(BlogList, { key: 'blog-list', blogs, removeBlog, initForm })
-      )
+    let form = <Form key="form" tempBlog={tempBlog} updateBlogInput={updateBlogInput} submitForm={submitForm} />;
+    let blogList = <BlogList key="blog-list" blogs={blogs} removeBlog={removeBlog} initForm={initForm} />;
+    let currentComponent = editMode ? form : blogList;
+    
+    return (
+      <section className="page">
+        {currentComponent}
+      </section>
     );
   }
 }
 
 // Initialize page
-ReactDOM.render(h(Page, { blogs: initBlogs }), root);
+ReactDOM.render(<Page blogs={initBlogs} />, root);
