@@ -34,19 +34,24 @@ let Blog = ({ blog, removeBlog, initForm }) => {
   );
 }
 
-let BlogList = ({ blogs, initForm, removeBlog }) =>
-  h('ul', { className: 'blog-list' }, [
-    blogs.map(b => h(Blog, { blog: b, removeBlog, initForm }))
-  ]);
+let BlogList = ({ blogs, initForm, removeBlog }) => (
+  <ul className="blog-list">
+    {blogs.map(b => (
+      <Blog blog={b} removeBlog={removeBlog} initForm={initForm}/>
+    ))}
+  </ul>
+);
 
 let Form = ({ tempBlog, updateBlogInput, submitForm }) => {
   let { title, body } = tempBlog;
 
-  return h('form', { className: 'form' }, [
-    h('input', { type: 'text', onChange: (e) => updateBlogInput({ title: e.target.value }), value: title }),
-    h('input', { type: 'text', onChange: (e) => updateBlogInput({ body: e.target.value }), value: body }),
-    h('button', { onClick: () => submitForm(tempBlog) }, 'Save')
-  ]);
+  return (
+    <form className="form">
+      <input type="text" onChange={(e) => updateBlogInput({ title: e.target.value })} value={title} />
+      <input type="text" onChange={(e) => updateBlogInput({ body: e.target.value })} value={body} />
+      <button onClick={() => submitForm(tempBlog)}>Save</button>
+    </form>
+  );
 }
 
 class Page extends React.Component {
