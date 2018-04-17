@@ -58,8 +58,8 @@ class Page extends Component {
       });
     }
 
-    let submitForm = (blog) => {
-      updateBlogs(blog);
+    let submitForm = () => {
+      updateBlogs(tempBlog);
       closeForm();
     }
 
@@ -69,14 +69,15 @@ class Page extends Component {
         editMode: true
       });
     }
-
-    let form = <Form key="form" tempBlog={tempBlog} updateBlogInput={updateBlogInput} submitForm={submitForm} />;
-    let blogList = <BlogList key="blog-list" blogs={blogs} removeBlog={removeBlog} initForm={initForm} />;
-    let currentComponent = editMode ? form : blogList;
     
     return (
       <section className="page">
-        {currentComponent}
+        {
+          editMode ?
+          <Form key="form" tempBlog={tempBlog} updateBlogInput={updateBlogInput} submitForm={submitForm} />
+            :
+          <BlogList key="blog-list" blogs={blogs} removeBlog={removeBlog} initForm={initForm} />
+        }
       </section>
     );
   }

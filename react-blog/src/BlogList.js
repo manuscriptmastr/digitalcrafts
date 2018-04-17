@@ -3,9 +3,11 @@ import Blog from './Blog';
 
 let BlogList = ({ blogs, initForm, removeBlog }) => (
   <ul className="blog-list">
-    {blogs.map(b => (
-      <Blog blog={b} removeBlog={removeBlog} initForm={initForm}/>
-    ))}
+    {
+      blogs.map((b, i) =>
+        <Blog key={i} blog={b} removeBlog={removeBlog} initForm={initForm}/>
+      )
+    }
   </ul>
 );
 
